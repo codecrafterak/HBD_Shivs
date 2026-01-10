@@ -311,7 +311,7 @@
             <p class="instructions">Click or tap the cakes to pop them! Avoid the bombs!</p>
             <canvas id="gameCanvas" width="600" height="400"></canvas>
             <div class="game-info">
-                Score: <span id="score">0</span> | Lives: <span id="lives">3</span>
+                Score: <span id="score">0</span> | Lives: <span id="lives">1</span>
             </div>
         </div>
 
@@ -503,7 +503,7 @@
             if (gameOver) {
                 // Reset game
                 score = 0;
-                lives = 3;
+                lives = 1;
                 hearts = [];
                 particles = [];
                 gameOver = false;
@@ -523,12 +523,12 @@
                     const heart = hearts[i];
                     
                     if (heart.isGood) {
-                        score += 50.2;
+                        score += 1;
                         document.getElementById('score').textContent = score.toFixed(2);
                         createParticles(heart.x, heart.y, true);
                         
-                        // Check if score reached 2008
-                        if (score >= 2008) {
+                        // Check if score reached 18
+                        if (score >= 18) {
                             // Redirect to surprise page
                             window.location.href = 'surprise.html';
                         }
