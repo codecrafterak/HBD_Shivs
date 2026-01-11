@@ -232,50 +232,80 @@
             box-shadow: 0 20px 40px rgba(255, 105, 180, 0.5);
         }
 
-        .photo-placeholder {
+        .gallery-grid img {
             width: 100%;
+            display: block;
             height: 300px;
-            background: linear-gradient(135deg, #ffc0e3, #ff9ec8);
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            border-radius: 18px 18px 0 0;
+        }
+
+        .photo-card {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4em;
-            position: relative;
+            flex-direction: column;
+            background: white;
+            border-radius: 20px;
             overflow: hidden;
         }
 
-        .photo-placeholder::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
-        }
+        .photo-card:hover img { transform: scale(1.05); }
 
         .photo-caption {
-            padding: 20px;
+            padding: 16px;
             text-align: center;
+            background: white;
         }
 
         .photo-caption h3 {
             color: #ff1493;
-            font-size: 1.3em;
-            margin-bottom: 8px;
+            font-size: 1.2em;
+            margin-bottom: 6px;
         }
 
         .photo-caption p {
             color: #666;
             font-size: 0.95em;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .lightbox.open { display: flex; }
+
+        .lightbox .lightbox-inner {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+
+        .lightbox .caption { margin-top: 12px; font-size: 1em; }
+
+        .lightbox .nav { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; font-size: 2.2em; background: transparent; border: none; padding: 12px; cursor: pointer; }
+        .lightbox .prev { left: 18px; }
+        .lightbox .next { right: 18px; }
+        .lightbox .close { position: absolute; top: 18px; right: 18px; color: #fff; font-size: 2em; background: transparent; border: none; cursor: pointer; }
+
+        @media (max-width: 768px) {
+            .gallery-grid img { height: 220px; }
+            .gallery-grid { gap: 16px; }
         }
 
         /* Back Button */
@@ -372,53 +402,46 @@
             <h2 class="gallery-title">📸 Memory Gallery 📸</h2>
             <div class="gallery-grid">
                 <div class="photo-card">
-                    <div class="photo-placeholder">📷</div>
-                    <div class="photo-caption">
-                        <h3>Sweet Memories</h3>
-                        <p>Add your favorite photo here!</p>
-                    </div>
+                    <img class="gallery-img" src="Shivani1.jpg" data-large="Shivani1.jpg" >
+                    <div class="photo-caption"><h3>Beach Day</h3><p>Sun and smiles</p></div>
                 </div>
 
                 <div class="photo-card">
-                    <div class="photo-placeholder">🎂</div>
-                    <div class="photo-caption">
-                        <h3>Birthday Wishes</h3>
-                        <p>Celebrating your special day!</p>
-                    </div>
+                    <img class="gallery-img" src="Shivani2.jpg" data-large="Shivani2.jpg" >
+                    <div class="photo-caption"><h3>Mountain Hike</h3><p>Adventure together</p></div>
                 </div>
 
                 <div class="photo-card">
-                    <div class="photo-placeholder">🌟</div>
-                    <div class="photo-caption">
-                        <h3>Shining Moments</h3>
-                        <p>Your brightest memories!</p>
-                    </div>
+                    <img class="gallery-img" src="Shivani3.jpg" data-large="Shivani3.jpg">
+                    <div class="photo-caption"><h3>City Lights</h3><p>Night out</p></div>
                 </div>
 
                 <div class="photo-card">
-                    <div class="photo-placeholder">💝</div>
-                    <div class="photo-caption">
-                        <h3>Friendship Forever</h3>
-                        <p>Precious moments together!</p>
-                    </div>
+                    <img class="gallery-img" src="Shivani4.jpg" data-large="Shivani4.jpg">
+                    <div class="photo-caption"><h3>Flowers</h3><p>Blooming joy</p></div>
                 </div>
 
                 <div class="photo-card">
-                    <div class="photo-placeholder">🎈</div>
-                    <div class="photo-caption">
-                        <h3>Joyful Times</h3>
-                        <p>Laughter and happiness!</p>
-                    </div>
+                    <img class="gallery-img" src="Shivani5.jpg" data-large="Shivani5.jpg">
+                    <div class="photo-caption"><h3>Friends</h3><p>Good times</p></div>
                 </div>
 
                 <div class="photo-card">
-                    <div class="photo-placeholder">✨</div>
-                    <div class="photo-caption">
-                        <h3>New Beginnings</h3>
-                        <p>Here's to turning 18!</p>
-                    </div>
+                    <img class="gallery-img" src="Shivani6.jpg" data-large="Shivani6.jpg">
+                    <div class="photo-caption"><h3>Sunset</h3><p>Golden hour</p></div>
                 </div>
             </div>
+            
+            <!-- Lightbox -->
+            <div id="lightbox" class="lightbox" aria-hidden="true">
+                <button class="nav prev" aria-label="Previous">‹</button>
+                <div class="lightbox-inner">
+                    <button class="close" aria-label="Close">×</button>
+                    <img id="lightbox-img" src="" alt="">
+                    <div class="caption" id="lightbox-caption"></div>
+                </div>
+                <button class="nav next" aria-label="Next">›</button>
+            </div> 
         </div>
 
         <a href="javascript:history.back()" class="back-button">← Back to Game</a>
@@ -480,6 +503,51 @@
                 }, 10);
             });
         });
+
+        // Lightbox functionality
+        (function(){
+            const imgs = Array.from(document.querySelectorAll('.gallery-img'));
+            if (!imgs.length) return;
+            const lightbox = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightbox-img');
+            const lbCaption = document.getElementById('lightbox-caption');
+            const prevBtn = document.querySelector('.lightbox .prev');
+            const nextBtn = document.querySelector('.lightbox .next');
+            const closeBtn = document.querySelector('.lightbox .close');
+            let current = 0;
+
+            function open(index){
+                const el = imgs[index];
+                lbImg.src = el.dataset.large || el.src;
+                lbImg.alt = el.alt || '';
+                lbCaption.textContent = el.title || el.alt || '';
+                current = index;
+                lightbox.classList.add('open');
+                lightbox.setAttribute('aria-hidden','false');
+            }
+
+            function close(){
+                lightbox.classList.remove('open');
+                lightbox.setAttribute('aria-hidden','true');
+            }
+
+            function showNext(delta){
+                current = (current + delta + imgs.length) % imgs.length;
+                open(current);
+            }
+
+            imgs.forEach((img, i) => img.addEventListener('click', () => open(i)));
+            prevBtn.addEventListener('click', () => showNext(-1));
+            nextBtn.addEventListener('click', () => showNext(1));
+            closeBtn.addEventListener('click', close);
+            lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                if (e.key === 'ArrowRight') showNext(1);
+                if (e.key === 'ArrowLeft') showNext(-1);
+            });
+        })();
     </script>
 </body>
 </html>
