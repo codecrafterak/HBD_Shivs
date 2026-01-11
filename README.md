@@ -35,5 +35,3 @@ No server, build steps, or dependencies are required — this is pure HTML/CSS/J
 - Personal project for Shivani's birthday — use or modify with attribution.
 
 ---
-
-If you'd like, I can: (1) add a short install/run script, (2) add badges, or (3) commit this README to a Git repo and add a LICENSE file. Tell me which you'd prefer.
