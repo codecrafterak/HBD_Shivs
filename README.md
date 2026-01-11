@@ -18,7 +18,6 @@ A small, static birthday microsite made for Shivani's 18th birthday.
 - `surprise.html` — celebration page (gallery, confetti)
 - `Shivani*.jpg`, `.png`, `.jpeg` — gallery images
 - `Dance.gif` — animated gallery image
-- `Video Project 1.mp4` — video file included in the folder
 - `.gitattributes`
 
 ## How to run
